@@ -1,24 +1,48 @@
 $(document).ready(function () {
-    $(".form-signin > .btn-block").click(function () {
-        var inputs = $('.form-signin > input');
-        var iVal = [];
-        for (var i = 0; i < inputs.length; i++) {
-            if (inputs[i].type == 'email' ||
-                inputs[i].type == 'password')
-                iVal.push(inputs[i].value);
+    $('form').submit(function() {
+        /*if ($(this).find('input[name=name]').val() == '') {
+            alert('Введите имя пользователя');
+            return false;
         }
-        iVal = iVal.map(function(item){
-            return item.toLowerCase();
-        });
-        if (iVal[0] == 'user' &&
-                iVal[1] == 'password') {
+        else if ($(this).find('input[name=password]').val() == '') {
+            alert('Введите пароль');
+            return false;
+        }*/
+        if ($(this).find('input[name=name]').val() == 'user' &&
+                $(this).find('input[name=password]').val() == 'password') {
             $('.form-signin-container').animate(
                 { opacity: "0" },
                 1000,
                 function() {
-                    $(this).css({display:'none'});
+                    /*$(this).css({display:'none'});*/
+                    $(this).remove();
+
+                    var d = new Date();
+                    var h = d.getHours();
+                    var greet;
+
+                    if (h >= 6 && h < 12) {
+                        greet = 'Доброе утро';
+                    }
+                    else if (h >= 12 && h < 18) {
+                        greet = 'Добрый день';
+                    }
+                    else {
+                        greet = 'Добрый вечер';
+                    }
+
+                    $('#greeting').css('opacity', '0')
+                        .html('<h3>'+ greet +'!</h3>')
+                        .animate({ opacity: "1" }, 1000);
+
                 }
             );
+            /* без сервера */
+            console.log('log-in');
+            return false;
+        }
+        else {
+            return false;
         }
     });
 });
