@@ -20,7 +20,12 @@ $(document).ready(function () {
             append('<h3>'+ greet +'!</h3>').
             animate({ opacity: '1' }, 1000).
             click(function() {
-                $(this).remove();
+                $(this).animate(
+                    { opacity: '0' }, 1000,
+                    function() {
+                        $(this).remove();
+                    }
+                );
             });
     };
 
