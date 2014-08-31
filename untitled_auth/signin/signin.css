@@ -38,3 +38,18 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.form-signin .error {
+    position: absolute;
+    z-index: 50;
+    margin-top: 8px;
+    margin-left: 100px;
+    padding: 3px;
+    background-color: #f9f2f4;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 3px 0 #c0c0c0 inset;
+}
+.form-signin .error.login {
+    margin-left: 25px;
+}

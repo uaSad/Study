@@ -14,7 +14,9 @@ $(document).ready(function () {
             greet = 'Добрый вечер';
         }
 
-        $('<div id="greeting"></div>').
+        /*$('<div id="greeting"></div>').*/
+        $('<div>').
+            attr({'id':'greeting'}).
             appendTo('#wrapper').
             css('opacity', '0').
             append('<h3>'+ greet +'!</h3>').
@@ -29,12 +31,36 @@ $(document).ready(function () {
             });
     };
 
+    $('.form-signin-container input').focus(function() {
+        $('.form-signin-container').find('.error').remove();
+    });
+    /*
+    $('.form-signin-container input').mousemove(function() {
+        $('.form-signin-container').find('.error').animate(
+                { opacity: '0' }, 500,
+                function() {
+                    $(this).remove();
+                }
+        );
+    });*/
+
+
     $('form').submit(function() {
         var userName = $(this).find('input[name=name]').val();
         var userPassword = $(this).find('input[name=password]').val();
 
-        if (!userName || !userPassword)
+        $(this).find('.error').remove();
+
+        if (!userName) {
+            $(this).find('input[name=name]').
+                before('<div class="error">Введите имя</div>');
             return false;
+        }
+        if (!userPassword) {
+            $(this).find('input[name=password]').
+                before('<div class="error">Введите пароль</div>');
+            return false;
+        }
 
         if (userName.toLowerCase() == 'user' &&
                 userPassword == 'password') {
@@ -50,6 +76,8 @@ $(document).ready(function () {
             return false;
         }
         else {
+            $(this).find('button').
+                before('<div class="error login">Ошибка неверные имя или пароль.</div>');
             return false;
         }
     });
